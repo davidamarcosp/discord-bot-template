@@ -1,0 +1,48 @@
+{
+  "name": "discord-bot-boilerplate",
+  "version": "1.0.0",
+  "description": "A boilerplate to develop discord bots using discord.js v13+",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run format && tsc && node ./build/src/index.js",
+    "start:dev": "npm run format && nodemon",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidamarcosp/discord-bot-boilerplate.git"
+  },
+  "keywords": [
+    "Discord",
+    "Typescript",
+    "DiscordJS",
+    "Bot"
+  ],
+  "author": "David Marcos & Ruben Valdes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidamarcosp/discord-bot-boilerplate/issues"
+  },
+  "homepage": "https://github.com/davidamarcosp/discord-bot-boilerplate#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "dotenv": "^14.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord.js": "^13.6.0"
+  }
+}
