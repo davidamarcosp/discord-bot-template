@@ -12,7 +12,7 @@ interface InteractionExecute {
 }
 
 export interface DiscordModule {
-  name: string;
+  name?: string;
   type: DiscordModuleTypes;
   execute: InteractionExecute;
 }

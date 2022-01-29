@@ -1,9 +1,9 @@
 import { ButtonInteraction } from 'discord.js';
 import { DiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
 import { ButtonCustomIds } from '../../types/enums/EButtonCustomIds';
+import { ButtonModule } from '../../types/interfaces/IDiscordModules';
 
-export default {
-  name: ButtonCustomIds.good,
+export const button: ButtonModule = {
   customId: ButtonCustomIds.good,
   type: DiscordModuleTypes.button,
   async execute(interaction: ButtonInteraction) {

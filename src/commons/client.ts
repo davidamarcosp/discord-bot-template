@@ -43,19 +43,17 @@ export class BotClient extends Client {
     if (keys.length === 1) {
       const discordModule = importedModule[keys[0]];
 
-      if (isDiscordModule(discordModule)) {
-        if (isSlashCommandModule(discordModule) && discordModule?.type === DiscordModuleTypes.command) {
-          this.commands.set(discordModule.name, discordModule);
-        }
+      if (isSlashCommandModule(discordModule) && discordModule?.type === DiscordModuleTypes.command) {
+        this.commands.set(discordModule.name, discordModule);
+      }
 
-        if (isEventModule(discordModule) && discordModule?.type === DiscordModuleTypes.event) {
-          this.events.set(discordModule.name, discordModule);
-          this.on(discordModule.name, (...args) => discordModule.execute(...args, this));
-        }
+      if (isEventModule(discordModule) && discordModule?.type === DiscordModuleTypes.event) {
+        this.events.set(discordModule.name, discordModule);
+        this.on(discordModule.name, (...args) => discordModule.execute(...args, this));
+      }
 
-        if (isButtonModule(discordModule) && discordModule?.type === DiscordModuleTypes.button) {
-          this.buttons.set(discordModule.customId, discordModule);
-        }
+      if (isButtonModule(discordModule) && discordModule?.type === DiscordModuleTypes.button) {
+        this.buttons.set(discordModule.customId, discordModule);
       }
     }
   }
@@ -124,14 +122,6 @@ export class BotClient extends Client {
     });
   }
 }
-
-const isDiscordModule = (object: any): object is Modules.DiscordModule => {
-  return (
-    (object as Modules.DiscordModule).name !== undefined &&
-    (object as Modules.DiscordModule).type !== undefined &&
-    (object as Modules.DiscordModule).execute !== undefined
-  );
-};
 
 const isSlashCommandModule = (object: any): object is Modules.SlashCommandModule => {
   return (
