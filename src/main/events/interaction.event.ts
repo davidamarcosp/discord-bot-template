@@ -5,11 +5,13 @@ import {
   MessageComponentInteraction,
   SelectMenuInteraction
 } from 'discord.js';
-import { DiscordEventNames } from '../../types/EDiscordEventNames';
+import { DiscordEventNames } from '../../types/enums/EDiscordEventNames';
 import { BotClient } from '../../commons/client';
+import { DiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
 
-export const event = {
+export default {
   name: DiscordEventNames.interactionCreate,
+  type: DiscordModuleTypes.event,
   async execute(
     interaction:
       | Interaction
