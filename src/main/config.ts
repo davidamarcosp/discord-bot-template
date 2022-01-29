@@ -1,9 +1,6 @@
-import { DiscordBotConfig } from '../types/IDiscordBotConfig';
+import { DiscordBotConfig } from '../types/interfaces/IDiscordBotConfig';
 
-export const config: DiscordBotConfig = {
+export const mainBotConfig: DiscordBotConfig = {
   token: process.env.DISCORD_BOT_TOKEN,
-  guildIds: process.env.DISCORD_GUILD_IDS,
-  eventsFilesPath: './src/main/events/',
-  commandsFilesPath: './src/main/commands/',
-  buttonsFilesPath: './src/main/buttons/'
+  path: './src/main/'
 };
