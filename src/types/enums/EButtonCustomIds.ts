@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export enum ButtonCustomIds {
+export enum EButtonCustomIds {
   good = 'good',
   bad = 'bad'
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export enum DiscordEventNames {
+export enum EDiscordEventNames {
   ready = 'ready',
   interactionCreate = 'interactionCreate'
 }

@@ -1,25 +1,27 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, MessageActionRow, MessageButton } from 'discord.js';
-import { CommandNames } from '../../types/enums/ECommandNames';
-import { DiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
-import { ButtonCustomIds } from '../../types/enums/EButtonCustomIds';
-import { SlashCommandModule } from '../../types/interfaces/IDiscordModules';
-import { CommandPermissionType } from '../../types/enums/ECommandPermissionType';
+import { ECommandNames } from '../../types/enums/ECommandNames';
+import { EDiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
+import { EButtonCustomIds } from '../../types/enums/EButtonCustomIds';
+import { IApplicationCommandModule } from '../../types/interfaces/IDiscordModules';
+import { EApplicationCommandPermissionType } from '../../types/enums/ECommandPermissionType';
+import { EApplicationCommandTypes } from '../../types/enums/EApplicationCommandTypes';
 
-export const slashCommand: SlashCommandModule = {
-  name: CommandNames.helloGlobal,
-  type: DiscordModuleTypes.command,
+export const slashCommand: IApplicationCommandModule = {
+  name: ECommandNames.helloGlobal,
+  type: EDiscordModuleTypes.command,
   isGuildCommand: false,
-  data: new SlashCommandBuilder()
-    .setName(CommandNames.hello)
-    .setDescription('this is a description for a global command')
-    .setDefaultPermission(false),
+  data: {
+    name: ECommandNames.helloGlobal,
+    description: 'this is a description for a global command',
+    default_permission: false,
+    type: EApplicationCommandTypes.CHAT_INPUT
+  },
   authorization: [
     {
       permissions: [
         {
           id: '147926645653766144',
-          type: CommandPermissionType.user,
+          type: EApplicationCommandPermissionType.USER,
           permission: true
         }
       ]
@@ -27,8 +29,8 @@ export const slashCommand: SlashCommandModule = {
   ],
   async execute(interaction: CommandInteraction) {
     try {
-      const firstButton = new MessageButton().setCustomId(ButtonCustomIds.good).setLabel('Good').setStyle('PRIMARY');
-      const secondButton = new MessageButton().setCustomId(ButtonCustomIds.bad).setLabel('Bad').setStyle('PRIMARY');
+      const firstButton = new MessageButton().setCustomId(EButtonCustomIds.good).setLabel('Good').setStyle('PRIMARY');
+      const secondButton = new MessageButton().setCustomId(EButtonCustomIds.bad).setLabel('Bad').setStyle('PRIMARY');
       const row = new MessageActionRow().addComponents(firstButton, secondButton);
 
       await interaction.reply({

@@ -1,34 +1,32 @@
 /* eslint-disable no-unused-vars */
-import { ClientEvents, Interaction, ButtonInteraction, CommandInteraction, Message } from 'discord.js';
-import { SlashCommandBuilder } from '@discordjs/builders';
+import { ClientEvents, Interaction, ButtonInteraction, CommandInteraction } from 'discord.js';
 import { BotClient } from '../../commons/client';
-import { DiscordModuleTypes } from '../enums/EDiscordModuleTypes';
-import { DiscordCommandModulePermission } from './../interfaces/IDiscordCommandModulePermission';
+import { EDiscordModuleTypes } from '../enums/EDiscordModuleTypes';
+import { IApplicationCommandAuthorization } from './../interfaces/IApplicationCommandAuthorization';
+import { IApplicationCommandData } from './IApplicationCommandData';
 
 export type DiscordInteractions = Interaction | ButtonInteraction | CommandInteraction;
 
-interface InteractionExecute {
-  (interaction: DiscordInteractions, client: BotClient);
-}
+export type InteractionExecute = (interaction: DiscordInteractions, client: BotClient) => void;
 
 export interface DiscordModule {
   name?: string;
-  type: DiscordModuleTypes;
+  type: EDiscordModuleTypes;
   execute: InteractionExecute;
 }
 
-export interface SlashCommandModule extends DiscordModule {
+export interface IApplicationCommandModule extends DiscordModule {
   name: any;
   isGuildCommand: boolean;
-  data: SlashCommandBuilder;
-  authorization: DiscordCommandModulePermission[];
+  data: IApplicationCommandData;
+  authorization: IApplicationCommandAuthorization[];
 }
 
-export interface EventModule extends DiscordModule {
+export interface IEventModule extends DiscordModule {
   name: keyof ClientEvents;
   execute: any;
 }
 
-export interface ButtonModule extends DiscordModule {
+export interface IButtonModule extends DiscordModule {
   customId: string;
 }

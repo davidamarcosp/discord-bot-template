@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export enum CommandNames {
+export enum ECommandNames {
   hello = 'hello',
   helloGlobal = 'hello-global'
 }

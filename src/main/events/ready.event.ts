@@ -1,10 +1,11 @@
-import { DiscordEventNames } from '../../types/enums/EDiscordEventNames';
+import { EDiscordEventNames } from '../../types/enums/EDiscordEventNames';
 import { BotClient } from '../../commons/client';
-import { DiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
+import { EDiscordModuleTypes } from '../../types/enums/EDiscordModuleTypes';
+import { IEventModule } from 'types/interfaces/IDiscordModules';
 
-export default {
-  name: DiscordEventNames.ready,
-  type: DiscordModuleTypes.event,
+export const event: IEventModule = {
+  name: EDiscordEventNames.ready,
+  type: EDiscordModuleTypes.event,
   async execute(client: BotClient) {
     console.log(`Connected as ${client.user.tag} ${client.user.id}`);
   }
