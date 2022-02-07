@@ -1,17 +1,17 @@
 import { REST } from '@discordjs/rest';
 import { join } from 'path';
-import { RESTPostAPIApplicationCommandsJSONBody, Routes } from 'discord-api-types/v9';
+import { Routes } from 'discord-api-types/v9';
 import { Client, Collection } from 'discord.js';
 import { readdirSync } from 'fs';
 import * as Modules from '../types/interfaces/IDiscordModules';
-import { DiscordModuleTypes } from '../types/enums/EDiscordModuleTypes';
+import { IApplicationCommandData } from 'types/interfaces/IApplicationCommandData';
 
 export class BotClient extends Client {
-  public commands: Collection<string, Modules.SlashCommandModule> = new Collection();
+  public commands: Collection<string, Modules.IApplicationCommandModule> = new Collection();
 
-  public events: Collection<string, Modules.EventModule> = new Collection();
+  public events: Collection<string, Modules.IEventModule> = new Collection();
 
-  public buttons: Collection<string, Modules.ButtonModule> = new Collection();
+  public buttons: Collection<string, Modules.IButtonModule> = new Collection();
 
   private discordAPI: REST;
 
@@ -43,16 +43,16 @@ export class BotClient extends Client {
     if (keys.length === 1) {
       const discordModule = importedModule[keys[0]];
 
-      if (isSlashCommandModule(discordModule) && discordModule?.type === DiscordModuleTypes.command) {
+      if (isSlashCommandModule(discordModule)) {
         this.commands.set(discordModule.name, discordModule);
       }
 
-      if (isEventModule(discordModule) && discordModule?.type === DiscordModuleTypes.event) {
+      if (isEventModule(discordModule)) {
         this.events.set(discordModule.name, discordModule);
         this.on(discordModule.name, (...args) => discordModule.execute(...args, this));
       }
 
-      if (isButtonModule(discordModule) && discordModule?.type === DiscordModuleTypes.button) {
+      if (isButtonModule(discordModule)) {
         this.buttons.set(discordModule.customId, discordModule);
       }
     }
@@ -64,7 +64,7 @@ export class BotClient extends Client {
 
       if (commands.length > 0) {
         const updatedCommands = await this.updateGuildSlashCommands(
-          commands.map((command) => command.data.toJSON()),
+          commands.map((command) => command.data),
           guild.id
         );
 
@@ -88,19 +88,13 @@ export class BotClient extends Client {
     // TODO - Register global commands
   }
 
-  private async updateGuildSlashCommands(
-    commands: RESTPostAPIApplicationCommandsJSONBody[],
-    guildId: string
-  ): Promise<any> {
+  private async updateGuildSlashCommands(commands: IApplicationCommandData[], guildId: string): Promise<any> {
     return await this.discordAPI.put(Routes.applicationGuildCommands(this.application.id, guildId), {
       body: commands
     });
   }
 
-  private async updateGuildSlashCommandsPermissions(
-    commands: RESTPostAPIApplicationCommandsJSONBody[],
-    guildId: string
-  ): Promise<any> {
+  private async updateGuildSlashCommandsPermissions(commands: any, guildId: string): Promise<any> {
     return await this.discordAPI.put(Routes.guildApplicationCommandsPermissions(this.application.id, guildId), {
       body: commands
     });
@@ -123,27 +117,27 @@ export class BotClient extends Client {
   }
 }
 
-const isSlashCommandModule = (object: any): object is Modules.SlashCommandModule => {
+const isSlashCommandModule = (object: any): object is Modules.IApplicationCommandModule => {
   return (
-    (object as Modules.SlashCommandModule).name !== undefined &&
-    (object as Modules.SlashCommandModule).type !== undefined &&
-    (object as Modules.SlashCommandModule).data !== undefined &&
-    (object as Modules.SlashCommandModule).execute !== undefined
+    (object as Modules.IApplicationCommandModule).name !== undefined &&
+    (object as Modules.IApplicationCommandModule).type !== undefined &&
+    (object as Modules.IApplicationCommandModule).data !== undefined &&
+    (object as Modules.IApplicationCommandModule).execute !== undefined
   );
 };
 
-const isEventModule = (object: any): object is Modules.EventModule => {
+const isEventModule = (object: any): object is Modules.IEventModule => {
   return (
-    (object as Modules.EventModule).name !== undefined &&
-    (object as Modules.EventModule).type !== undefined &&
-    (object as Modules.EventModule).execute !== undefined
+    (object as Modules.IEventModule).name !== undefined &&
+    (object as Modules.IEventModule).type !== undefined &&
+    (object as Modules.IEventModule).execute !== undefined
   );
 };
 
-const isButtonModule = (object: any): object is Modules.ButtonModule => {
+const isButtonModule = (object: any): object is Modules.IButtonModule => {
   return (
-    (object as Modules.ButtonModule).customId !== undefined &&
-    (object as Modules.ButtonModule).type !== undefined &&
-    (object as Modules.ButtonModule).execute !== undefined
+    (object as Modules.IButtonModule).customId !== undefined &&
+    (object as Modules.IButtonModule).type !== undefined &&
+    (object as Modules.IButtonModule).execute !== undefined
   );
 };

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-export enum CommandPermissionType {
-  role = 1,
-  user = 2
+export enum EApplicationCommandPermissionType {
+  ROLE = 1,
+  USER = 2
 }

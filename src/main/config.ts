@@ -1,6 +1,6 @@
-import { DiscordBotConfig } from '../types/interfaces/IDiscordBotConfig';
+import { IDiscordBotConfig } from '../types/interfaces/IDiscordBotConfig';
 
-export const mainBotConfig: DiscordBotConfig = {
+export const mainBotConfig: IDiscordBotConfig = {
   token: process.env.DISCORD_BOT_TOKEN,
   path: './src/main/'
 };
