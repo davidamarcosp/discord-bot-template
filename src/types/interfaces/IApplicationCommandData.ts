@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { EApplicationCommandTypes } from '../enums/EApplicationCommandTypes';
-import { EApplicationCommandOptionTypes } from '../enums/EApplicationCommandOptionTypes';
-import { EApplicationCommandOptionChannelTypes } from '../enums/EApplicationCommandOptionChannelTypes';
+import { EApplicationCommandTypes } from 'types/enums/EApplicationCommandTypes';
+import { EApplicationCommandOptionTypes } from 'types/enums/EApplicationCommandOptionTypes';
+import { EApplicationCommandOptionChannelTypes } from 'types/enums/EApplicationCommandOptionChannelTypes';
 
 interface IApplicationCommandOptionChoice {
   name: string;

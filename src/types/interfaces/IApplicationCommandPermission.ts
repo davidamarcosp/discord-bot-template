@@ -1,4 +1,4 @@
-import { EApplicationCommandPermissionType } from '../enums/ECommandPermissionType';
+import { EApplicationCommandPermissionType } from 'types/enums/ECommandPermissionType';
 
 export interface IApplicationCommandPermission {
   id: string;

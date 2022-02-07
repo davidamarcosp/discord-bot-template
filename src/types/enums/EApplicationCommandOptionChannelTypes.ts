@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export enum EApplicationCommandOptionChannelTypes {
   GUILD_TEXT = 0, // a text channel within a server
   DM = 1, // a direct message between users

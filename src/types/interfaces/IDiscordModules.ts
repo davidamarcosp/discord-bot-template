@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClientEvents, Interaction, ButtonInteraction, CommandInteraction } from 'discord.js';
 import { BotClient } from '../../commons/client';
-import { EDiscordModuleTypes } from '../enums/EDiscordModuleTypes';
-import { IApplicationCommandAuthorization } from './../interfaces/IApplicationCommandAuthorization';
-import { IApplicationCommandData } from './IApplicationCommandData';
+import { EDiscordModuleTypes } from 'types/enums/EDiscordModuleTypes';
+import { IApplicationCommandAuthorization } from 'types/interfaces/IApplicationCommandAuthorization';
+import { IApplicationCommandData } from 'types/interfaces/IApplicationCommandData';
 
 export type DiscordInteractions = Interaction | ButtonInteraction | CommandInteraction;
 
@@ -16,7 +16,7 @@ export interface DiscordModule {
 }
 
 export interface IApplicationCommandModule extends DiscordModule {
-  name: any;
+  name: string;
   isGuildCommand: boolean;
   data: IApplicationCommandData;
   authorization: IApplicationCommandAuthorization[];

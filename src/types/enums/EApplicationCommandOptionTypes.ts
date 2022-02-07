@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export enum EApplicationCommandOptionTypes {
   SUB_COMMAND = 1,
   SUB_COMMAND_GROUP = 2,

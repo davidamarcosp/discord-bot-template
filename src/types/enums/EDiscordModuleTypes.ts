@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export enum EDiscordModuleTypes {
   event = 1,
   command = 2,

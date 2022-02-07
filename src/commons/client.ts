@@ -88,13 +88,13 @@ export class BotClient extends Client {
     // TODO - Register global commands
   }
 
-  private async updateGuildSlashCommands(commands: IApplicationCommandData[], guildId: string): Promise<any> {
+  private async updateGuildSlashCommands(commands: IApplicationCommandData[], guildId: string): Promise<unknown> {
     return await this.discordAPI.put(Routes.applicationGuildCommands(this.application.id, guildId), {
       body: commands
     });
   }
 
-  private async updateGuildSlashCommandsPermissions(commands: any, guildId: string): Promise<any> {
+  private async updateGuildSlashCommandsPermissions(commands: unknown, guildId: string): Promise<unknown> {
     return await this.discordAPI.put(Routes.guildApplicationCommandsPermissions(this.application.id, guildId), {
       body: commands
     });
@@ -117,7 +117,7 @@ export class BotClient extends Client {
   }
 }
 
-const isSlashCommandModule = (object: any): object is Modules.IApplicationCommandModule => {
+const isSlashCommandModule = (object: unknown): object is Modules.IApplicationCommandModule => {
   return (
     (object as Modules.IApplicationCommandModule).name !== undefined &&
     (object as Modules.IApplicationCommandModule).type !== undefined &&
@@ -126,7 +126,7 @@ const isSlashCommandModule = (object: any): object is Modules.IApplicationComman
   );
 };
 
-const isEventModule = (object: any): object is Modules.IEventModule => {
+const isEventModule = (object: unknown): object is Modules.IEventModule => {
   return (
     (object as Modules.IEventModule).name !== undefined &&
     (object as Modules.IEventModule).type !== undefined &&
@@ -134,7 +134,7 @@ const isEventModule = (object: any): object is Modules.IEventModule => {
   );
 };
 
-const isButtonModule = (object: any): object is Modules.IButtonModule => {
+const isButtonModule = (object: unknown): object is Modules.IButtonModule => {
   return (
     (object as Modules.IButtonModule).customId !== undefined &&
     (object as Modules.IButtonModule).type !== undefined &&
