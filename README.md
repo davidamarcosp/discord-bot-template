@@ -19,7 +19,19 @@ To start the app in development
   npm run start:dev
 ```
 
-To start the app in production, create a npm script or a dockerfile (depending in the approach used to deploy the app)
+To start the app in production
+
+```bash
+  npm run start:prod
+```
+
+## Deployment
+
+The application has a Docker configuration, you must setup the environment variables then run docker using the following command:
+
+```bash
+  docker-compose up
+```
     
 ## Environment Variables
 
